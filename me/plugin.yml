@@ -1,0 +1,6 @@
+name: JukeboxGUI
+main: me.iHolden.JukeboxGUI.Main
+version: 1.0
+description: Right click a jukebox to open a GUI with records.
+permissions:
+  jukeboxgui.use:
