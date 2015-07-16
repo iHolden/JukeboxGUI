@@ -22,7 +22,6 @@ public class IconMenu
   private String name;
   private int size;
   private OptionClickEventHandler handler;
-  private Plugin plugin;
   private String[] optionNames;
   private ItemStack[] optionIcons;
   
@@ -31,7 +30,6 @@ public class IconMenu
     this.name = name;
     this.size = size;
     this.handler = handler;
-    this.plugin = plugin;
     this.optionNames = new String[size];
     this.optionIcons = new ItemStack[size];
     plugin.getServer().getPluginManager().registerEvents(this, plugin);
@@ -59,7 +57,6 @@ public class IconMenu
   {
     HandlerList.unregisterAll(this);
     this.handler = null;
-    this.plugin = null;
     this.optionNames = null;
     this.optionIcons = null;
   }
@@ -72,7 +69,8 @@ public class IconMenu
     }
   }
   
-  @EventHandler(priority=EventPriority.MONITOR)
+  @SuppressWarnings("deprecation")
+@EventHandler(priority=EventPriority.MONITOR)
   void onInventoryClick(InventoryClickEvent event)
   {
     Player p = (Player)event.getWhoClicked();
@@ -89,7 +87,7 @@ public class IconMenu
       int slot = event.getRawSlot();
       if ((slot >= 0) && (slot < this.size) && (this.optionNames[slot] != null))
       {
-        Plugin plugin = this.plugin;
+        //Plugin plugin = this.plugin;
         OptionClickEvent e = new OptionClickEvent((Player)event.getWhoClicked(), slot, this.optionNames[slot]);
         this.handler.onOptionClick(e);
         if (e.willClose())
